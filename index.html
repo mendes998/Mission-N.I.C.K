@@ -243,7 +243,7 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
         const MUSIC_AMBIENT_2 = document.getElementById('phase2Music');
         const MUSIC_MEMORY = document.getElementById('memoryMusic');
         
-        // ARRAY ATUALIZADO: Apontando para os nomes de arquivos EXATOS na sua pasta assets/
+        // ARRAY COM CAMINHOS CORRIGIDOS E MANUAIS
         const memories = [
             { title: "Memória 1", url: "assets/FOTO 1 NICK.jpg" },
             { title: "Memória 2", url: "assets/FOTO 2 NICK.jpg" },
@@ -296,12 +296,17 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
             initializeTouchListeners();
         });
 
+        // FUNÇÃO MODIFICADA COM setTimeout para garantir a reprodução em mobile
         function verificarSenha() {
             const senha = document.getElementById('senhaInput').value.trim();
             if (senha === SENHA_CORRETA) {
                 stopAllMusic();
-                // O play da música da fase 2 está diretamente ligado ao clique do botão
-                MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+                
+                // USANDO setTimeout para garantir o play da música 2 em navegadores rigorosos
+                setTimeout(() => {
+                    MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+                }, 50);
+                
                 document.getElementById('fase1').style.display = 'none';
                 document.getElementById('fase2').style.display = 'block';
                 document.getElementById('codigoInput').focus();
@@ -311,17 +316,29 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
             }
         }
 
+        // FUNÇÃO MODIFICADA COM setTimeout
         function voltarParaFase1() {
             stopAllMusic();
-            MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada."));
+            
+            // USANDO setTimeout para garantir o play da música 1
+            setTimeout(() => {
+                MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada."));
+            }, 50);
+
             document.getElementById('fase2').style.display = 'none';
             document.getElementById('fase1').style.display = 'block';
             document.getElementById('senhaInput').focus();
         }
 
+        // FUNÇÃO MODIFICADA COM setTimeout
         function voltarParaFase2() {
             stopAllMusic();
-            MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+            
+            // USANDO setTimeout para garantir o play da música 2
+            setTimeout(() => {
+                MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+            }, 50);
+
             document.getElementById('mensagemFinal').style.display = 'none';
             document.getElementById('fase2').style.display = 'block';
             document.getElementById('codigoInput').focus();
@@ -387,12 +404,12 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
 
         function handleTouchStart(event) {
             touchStartX = event.touches[0].clientX;
-            touchEndX = touchStartX; // Garante que touchEndX tenha um valor inicial
+            touchEndX = touchStartX; 
         }
 
         function handleTouchMove(event) {
             touchEndX = event.touches[0].clientX;
-            // Opcional: Impedir o scroll vertical da página enquanto desliza a galeria
+            // Opcional: Descomente a linha abaixo se o scroll vertical estiver interferindo
             // event.preventDefault(); 
         }
 
@@ -408,7 +425,6 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
                     scrollGallery(-1);
                 }
             }
-            // Reseta as variáveis de toque
             touchStartX = 0;
             touchEndX = 0;
         }
