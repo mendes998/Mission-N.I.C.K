@@ -217,7 +217,7 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
             </div>
 
             <div id="memoria-content">
-                <div class="gallery-container">
+                <div class="gallery-container" id="touch-gallery-container">
                     <button class="arrow-btn arrow-left" onclick="scrollGallery(-1)">&#8592;</button>
                     <div class="gallery" id="memories-gallery"></div>
                     <button class="arrow-btn arrow-right" onclick="scrollGallery(1)">&#8594;</button>
@@ -242,7 +242,6 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
         const MUSIC_AMBIENT_1 = document.getElementById('phase1Music');
         const MUSIC_AMBIENT_2 = document.getElementById('phase2Music');
         const MUSIC_MEMORY = document.getElementById('memoryMusic');
-        // autoScrollInterval foi removida, já que não haverá autoplay
         
         // ARRAY ATUALIZADO: Apontando para os nomes de arquivos EXATOS na sua pasta assets/
         const memories = [
@@ -266,21 +265,14 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
             });
         }
         
-        // Função stopAutoscroll mantida, mas agora só limpa o interval se existir
-        function stopAutoscroll(){
-            // Se você decidir reativar o autoplay, o clearInterval ainda funciona
-            if (typeof autoScrollInterval !== 'undefined') {
-                clearInterval(autoScrollInterval);
-            }
-        }
-
         function startPhase1Music() {
+            // Tenta dar play, mas só funciona se houver interação prévia (como o clique no body)
             if (MUSIC_AMBIENT_1.paused) { 
                 MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada.")); 
             }
         }
 
-        // FUNÇÃO DE CONTROLE MANUAL DA MÚSICA
+        // FUNÇÃO DE CONTROLE MANUAL DA MÚSICA FINAL
         function toggleMusic() {
             const toggleButton = document.getElementById('musicToggle');
             if (!toggleButton) return;
@@ -295,15 +287,20 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Tenta iniciar a música ambiente no primeiro toque/clique em qualquer lugar
             startPhase1Music();
             document.addEventListener('click', startPhase1Music, { once: true });
             document.addEventListener('keypress', startPhase1Music, { once: true });
+            
+            // Inicializa listeners de toque para o carrossel (para celular)
+            initializeTouchListeners();
         });
 
         function verificarSenha() {
             const senha = document.getElementById('senhaInput').value.trim();
             if (senha === SENHA_CORRETA) {
                 stopAllMusic();
+                // O play da música da fase 2 está diretamente ligado ao clique do botão
                 MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
                 document.getElementById('fase1').style.display = 'none';
                 document.getElementById('fase2').style.display = 'block';
@@ -316,7 +313,6 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
 
         function voltarParaFase1() {
             stopAllMusic();
-            // Nenhuma necessidade de parar o autoscroll, já que foi removido.
             MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada."));
             document.getElementById('fase2').style.display = 'none';
             document.getElementById('fase1').style.display = 'block';
@@ -325,7 +321,6 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
 
         function voltarParaFase2() {
             stopAllMusic();
-            // Nenhuma necessidade de parar o autoscroll, já que foi removido.
             MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
             document.getElementById('mensagemFinal').style.display = 'none';
             document.getElementById('fase2').style.display = 'block';
@@ -337,11 +332,8 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
             if (codigo === CODIGO_CORRETO) {
                 stopAllMusic();
                 
-                // MÚSICA: Prepara o loop. O botão manual fará o play.
                 MUSIC_MEMORY.loop = true; 
-                
                 renderMemories();
-                // startAutoScroll() foi removida daqui!
                 
                 document.getElementById('fase2').style.display = 'none';
                 document.getElementById('mensagemFinal').style.display = 'block';
@@ -372,23 +364,66 @@ Eu te amo ao infinito e além e em cada universo!<br><br>
 
             const itemWidth = firstItem.offsetWidth + 15; // Largura do item + gap
             
-            // stopAutoscroll() removida, não há auto-scroll para parar
-
             currentScroll += direction * itemWidth;
             
-            if (currentScroll < 0) {
-                currentScroll = 0; 
-            }
-            
+            // Lógica de limite
             const maxScroll = gallery.scrollWidth - container.offsetWidth;
+            
+            if (currentScroll < 0) {
+                currentScroll = 0; // Impede scroll para a esquerda além do limite
+            }
             if (currentScroll > maxScroll) {
-                currentScroll = maxScroll; 
+                currentScroll = maxScroll; // Impede scroll para a direita além do limite
             }
             
             gallery.style.transform = `translateX(-${currentScroll}px)`;
         }
 
-        // Função startAutoScroll() removida, pois a navegação agora é manual.
+        // --- FUNÇÕES DE NAVEGAÇÃO TOUCH (SWIPE) PARA CELULAR ---
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const SWIPE_THRESHOLD = 50; // Mínimo de pixels para considerar um deslize
+
+        function handleTouchStart(event) {
+            touchStartX = event.touches[0].clientX;
+            touchEndX = touchStartX; // Garante que touchEndX tenha um valor inicial
+        }
+
+        function handleTouchMove(event) {
+            touchEndX = event.touches[0].clientX;
+            // Opcional: Impedir o scroll vertical da página enquanto desliza a galeria
+            // event.preventDefault(); 
+        }
+
+        function handleTouchEnd() {
+            const diffX = touchStartX - touchEndX;
+
+            if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+                if (diffX > 0) {
+                    // Deslize para a esquerda -> Mover a galeria para a DIREITA (próxima foto)
+                    scrollGallery(1);
+                } else {
+                    // Deslize para a direita -> Mover a galeria para a ESQUERDA (foto anterior)
+                    scrollGallery(-1);
+                }
+            }
+            // Reseta as variáveis de toque
+            touchStartX = 0;
+            touchEndX = 0;
+        }
+
+        function initializeTouchListeners() {
+            const galleryContainer = document.getElementById('touch-gallery-container');
+            if (galleryContainer) {
+                galleryContainer.addEventListener('touchstart', handleTouchStart, false);        
+                galleryContainer.addEventListener('touchmove', handleTouchMove, false);
+                galleryContainer.addEventListener('touchend', handleTouchEnd, false);
+            }
+        }
+        
+        // --- FIM DAS FUNÇÕES TOUCH ---
+
 
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
