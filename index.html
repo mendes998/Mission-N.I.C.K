@@ -1,205 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MISSÃO N.I.C.K — Operação Memórias</title>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --terminal-bg: #0d0d0d;
-            --terminal-fg: #00ff66;
-            --terminal-dark: #004d1a;
-            --error-color: #ff3333;
-        }
-        body {
-            background-color: var(--terminal-bg);
-            color: var(--terminal-fg);
-            font-family: 'Courier Prime', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        .terminal-container {
-            width: 90%;
-            max-width: 700px;
-            background-color: #001a00;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 0 40px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.2);
-            text-align: left;
-            animation: fadeIn 1.2s ease-out;
-            border: 2px solid var(--terminal-fg);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h2 {
-            text-align: center;
-            text-shadow: 0 0 5px var(--terminal-fg);
-            margin-bottom: 20px;
-        }
-        p {
-            margin: 5px 0;
-            line-height: 1.4;
-        }
-        .input-group {
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        input {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid var(--terminal-dark);
-            outline: none;
-            font-family: 'Courier Prime', monospace;
-            background: rgba(0, 0, 0, 0.8);
-            color: var(--terminal-fg);
-            box-shadow: inset 0 0 5px var(--terminal-dark);
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: var(--terminal-fg);
-            color: var(--terminal-bg);
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: 'Courier Prime', monospace;
-            transition: background 0.3s, box-shadow 0.3s;
-            text-shadow: none;
-        }
-        button:hover { 
-            background-color: #9cff9c; 
-            box-shadow: 0 0 15px var(--terminal-fg);
-        }
-        .hint {
-            margin-top: 8px;
-            font-size: 0.9em;
-            color: #ffcc00; 
-            font-style: italic;
-            text-align: center;
-        }
-        footer {
-            margin-top: 25px;
-            font-size: 0.8em;
-            color: var(--terminal-dark);
-            text-align: center;
-        }
-        #memoria-content {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .gallery-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-        .gallery {
-            display: flex;
-            gap: 15px;
-            transition: transform 0.5s ease;
-        }
-        .memory-item {
-            min-width: 180px;
-            height: 320px;
-            flex-shrink: 0;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 2px solid var(--terminal-fg);
-        }
-        .memory-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
-        .memory-item:hover img {
-            opacity: 1;
-        }
-        .memory-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            font-size: 0.7em;
-            padding: 3px 0;
-            text-align: center;
-        }
-        .arrow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.7);
-            border: none;
-            color: #00ff66;
-            font-size: 1.5em;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 6px;
-            z-index: 10;
-        }
-        .arrow-btn:hover {
-            background: rgba(0,0,0,0.9);
-        }
-        .arrow-left { left: 0; }
-        .arrow-right { right: 0; }
-        .back-button {
-            background-color: var(--error-color) !important;
-            color: white !important;
-            margin-top: 20px;
-        }
-        .back-button:hover {
-            background-color: #ff6666 !important;
-            box-shadow: 0 0 15px var(--error-color) !important;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSÃO N.I.C.K — Operação Memórias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --terminal-bg: #0d0d0d;
+            --terminal-fg: #00ff66;
+            --terminal-dark: #004d1a;
+            --error-color: #ff3333;
+        }
+        body {
+            background-color: var(--terminal-bg);
+            color: var(--terminal-fg);
+            font-family: 'Courier Prime', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .terminal-container {
+            width: 90%;
+            max-width: 700px;
+            background-color: #001a00;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 0 40px rgba(0,255,0,0.5), 0 0 10px rgba(0,255,0,0.2);
+            text-align: left;
+            animation: fadeIn 1.2s ease-out;
+            border: 2px solid var(--terminal-fg);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            text-align: center;
+            text-shadow: 0 0 5px var(--terminal-fg);
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+        .input-group {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--terminal-dark);
+            outline: none;
+            font-family: 'Courier Prime', monospace;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--terminal-fg);
+            box-shadow: inset 0 0 5px var(--terminal-dark);
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: var(--terminal-fg);
+            color: var(--terminal-bg);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Courier Prime', monospace;
+            transition: background 0.3s, box-shadow 0.3s;
+            text-shadow: none;
+        }
+        button:hover { 
+            background-color: #9cff9c; 
+            box-shadow: 0 0 15px var(--terminal-fg);
+        }
+        .hint {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #ffcc00; 
+            font-style: italic;
+            text-align: center;
+        }
+        footer {
+            margin-top: 25px;
+            font-size: 0.8em;
+            color: var(--terminal-dark);
+            text-align: center;
+        }
+        #memoria-content {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .gallery {
+            display: flex;
+            gap: 15px;
+            transition: transform 0.5s ease;
+        }
+        .memory-item {
+            min-width: 180px;
+            height: 320px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid var(--terminal-fg);
+        }
+        .memory-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        .memory-item:hover img {
+            opacity: 1;
+        }
+        .memory-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            font-size: 0.7em;
+            padding: 3px 0;
+            text-align: center;
+        }
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.7);
+            border: none;
+            color: #00ff66;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 6px;
+            z-index: 10;
+        }
+        .arrow-btn:hover {
+            background: rgba(0,0,0,0.9);
+        }
+        .arrow-left { left: 0; }
+        .arrow-right { right: 0; }
+        .back-button {
+            background-color: var(--error-color) !important;
+            color: white !important;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #ff6666 !important;
+            box-shadow: 0 0 15px var(--error-color) !important;
+        }
+    </style>
 </head>
 <body>
-    <div class="terminal-container">
-        <div id="fase1">
-            <h2>MISSÃO N.I.C.K — Operação Memórias</h2>
-            <p>> Acesso restrito ao agente: N.I.C.K</p>
-            <p>> Iniciando protocolo de segurança...</p>
-            <p>> Autenticação Nível 1 necessária</p>
-            <div class="input-group">
-                <input id="senhaInput" type="text" placeholder="Digite a CHAVE DE ACESSO" maxlength="8">
-                <button onclick="verificarSenha()">CONECTAR AO SISTEMA</button>
-            </div>
-            <p class="hint">💡 Dica: O início da nossa história</p>
-        </div>
-        <div id="fase2" style="display:none; margin-top:30px;">
-            <p>> [STATUS: ACESSO NÍVEL 1 CONCEDIDO]</p>
-            <p>> Decodificação de arquivos iniciada...</p>
-            <p>> Código final necessário para abrir o COFRE DE MEMÓRIAS:</p>
-            <div class="input-group">
-                <input id="codigoInput" type="text" placeholder="Digite o CÓDIGO FINAL (Ex: AADDMM)" maxlength="6">
-                <button onclick="verificarCodigo()">DESBLOQUEAR COFRE</button>
-            </div>
-            <p class="hint">💡 Dica: Uma data muito importante para a Agente J</p>
-            <div class="input-group">
-                <button class="back-button" onclick="voltarParaFase1()">← VOLTAR PARA NÍVEL 1</button>
-            </div>
-        </div>
-        <div id="mensagemFinal" style="display:none; margin-top:30px;">
-            <p>> [STATUS: COFRE DESBLOQUEADO]</p>
-            <p>> Acesso concedido às memórias 💚</p>
-            <div id="mensagem-principal">
-                <p id="original-message" style="margin-top:15px; text-align: center; color: #9cff9c;">
+    <div class="terminal-container">
+        <div id="fase1">
+            <h2>MISSÃO N.I.C.K — Operação Memórias</h2>
+            <p>> Acesso restrito ao agente: N.I.C.K</p>
+            <p>> Iniciando protocolo de segurança...</p>
+            <p>> Autenticação Nível 1 necessária</p>
+            <div class="input-group">
+                <input id="senhaInput" type="text" placeholder="Digite a CHAVE DE ACESSO" maxlength="8">
+                <button onclick="verificarSenha()">CONECTAR AO SISTEMA</button>
+            </div>
+            <p class="hint">💡 Dica: O início da nossa história</p>
+        </div>
+        <div id="fase2" style="display:none; margin-top:30px;">
+            <p>> [STATUS: ACESSO NÍVEL 1 CONCEDIDO]</p>
+            <p>> Decodificação de arquivos iniciada...</p>
+            <p>> Código final necessário para abrir o COFRE DE MEMÓRIAS:</p>
+            <div class="input-group">
+                <input id="codigoInput" type="text" placeholder="Digite o CÓDIGO FINAL (Ex: AADDMM)" maxlength="6">
+                <button onclick="verificarCodigo()">DESBLOQUEAR COFRE</button>
+            </div>
+            <p class="hint">💡 Dica: Uma data muito importante para a Agente J</p>
+            <div class="input-group">
+                <button class="back-button" onclick="voltarParaFase1()">← VOLTAR PARA NÍVEL 1</button>
+            </div>
+        </div>
+        <div id="mensagemFinal" style="display:none; margin-top:30px;">
+            <p>> [STATUS: COFRE DESBLOQUEADO]</p>
+            <p>> Acesso concedido às memórias 💚</p>
+            <div id="mensagem-principal">
+                <p id="original-message" style="margin-top:15px; text-align: center; color: #9cff9c;">
 Meu amado Nick,<br><br>
 Quando penso em nós, penso em aventura, em duas pessoas que escolheram explorar a vida juntas. Cada memória é uma prova de que vale a pena arriscar, sonhar e rir lado a lado.<br><br>
 Obrigada por ser meu parceiro, meu refúgio e minha maior alegria.<br><br>
@@ -208,139 +208,194 @@ Quero que saiba que te admiro, te amo e estou sempre torcendo por você, em todo
 Obrigado por ser quem você é e por me fazer tão feliz. Que possamos celebrar muitos e muitos aniversários juntos, sempre com amor, cumplicidade e alegria.<br><br>
 Eu te amo ao infinito e além e em cada universo!<br><br>
 — Agente J 💚
-                </p>
-            </div>
-            <h3 style="text-align:center; margin-top:25px; text-shadow:0 0 3px var(--terminal-fg);">:: ARQUIVOS RECUPERADOS ::</h3>
-            <div id="memoria-content">
-                <div class="gallery-container">
-                    <button class="arrow-btn arrow-left" onclick="scrollGallery(-1)">&#8592;</button>
-                    <div class="gallery" id="memories-gallery"></div>
-                    <button class="arrow-btn arrow-right" onclick="scrollGallery(1)">&#8594;</button>
-                </div>
-            </div>
-            <div class="input-group">
-                <button class="back-button" onclick="voltarParaFase2()">← VOLTAR PARA NÍVEL 2</button>
-            </div>
-        </div>
-        <footer>
-            Desenvolvido com ❤️ por Agente J — Missão N.I.C.K
-        </footer>
-    </div>
-    <audio id="phase1Music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-    <audio id="phase2Music" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
-    <audio id="memoryMusic" src="assets/2-muito-ao-vivo-de-paris.mp3" type="audio/mpeg" />
-  </audio>
-    <script>
-        const SENHA_CORRETA='05042025';
-        const CODIGO_CORRETO='221102';
-        const MUSIC_AMBIENT_1=document.getElementById('phase1Music');
-        const MUSIC_AMBIENT_2=document.getElementById('phase2Music');
-        const MUSIC_MEMORY=document.getElementById('memoryMusic');
-        let originalMessageText="";
+                </p>
+            </div>
+            <h3 style="text-align:center; margin-top:25px; text-shadow:0 0 3px var(--terminal-fg);">:: ARQUIVOS RECUPERADOS ::</h3>
+            <div id="memoria-content">
+                <div class="gallery-container">
+                    <button class="arrow-btn arrow-left" onclick="scrollGallery(-1)">&#8592;</button>
+                    <div class="gallery" id="memories-gallery"></div>
+                    <button class="arrow-btn arrow-right" onclick="scrollGallery(1)">&#8594;</button>
+                </div>
+            </div>
+            <div class="input-group">
+                <button class="back-button" onclick="voltarParaFase2()">← VOLTAR PARA NÍVEL 2</button>
+            </div>
+        </div>
+        <footer>
+            Desenvolvido com ❤️ por Agente J — Missão N.I.C.K
+        </footer>
+    </div>
+    
+        <audio id="phase1Music" loop src="assets/SoundHelix-Song-1.mp3"></audio>
+    <audio id="phase2Music" loop src="assets/SoundHelix-Song-2.mp3"></audio>
+    <audio id="memoryMusic" src="assets/2-much-live-from-paris.mp3" type="audio/mpeg"></audio>
+    
+    <script>
+        // Senhas de acesso (MANTIDAS)
+        const SENHA_CORRETA = '05042025';
+        const CODIGO_CORRETO = '221102';
+        
+        // Elementos de Áudio
+        const MUSIC_AMBIENT_1 = document.getElementById('phase1Music');
+        const MUSIC_AMBIENT_2 = document.getElementById('phase2Music');
+        const MUSIC_MEMORY = document.getElementById('memoryMusic');
+        let originalMessageText = "";
+        let autoScrollInterval; 
+        let slideshowInterval; 
+        let currentPhotoIndex = 0; 
 
-        const memories=[
-            {title:"Memória 1",url:"https://www.dropbox.com/scl/fi/izb2ucpeu68bx6vodllz7/FOTO-1-NICK.jpg?dl=1"},
-            {title:"Memória 2",url:"https://www.dropbox.com/scl/fi/npkc0jbnxrzx4ax0w6o7a/FOTO-2-NICK.jpg?dl=1"},
-            {title:"Memória 3",url:"https://www.dropbox.com/scl/fi/uqx1s8ixvt8q5sfbh2t72/FOTO-3-NICK.jpg?dl=1"},
-            {title:"Memória 4",url:"https://www.dropbox.com/scl/fi/3v4s6xbtayvf2g2e5s6o0/FOTO-5-NICK.webp?dl=1"},
-            {title:"Memória 5",url:"https://www.dropbox.com/scl/fi/9riqim49or3yhwdtp4pkz/FOTO-7-NICK.jpg?dl=1"},
-            {title:"Memória 6",url:"https://www.dropbox.com/scl/fi/o6fr6cnypft6e6w165c9j/FOTO-4-2.jpg?dl=1"},
-            {title:"Memória 7",url:"https://www.dropbox.com/scl/fi/ystu1qyk1c495xns48dsy/FOTO-6-NICK.jpg?dl=1"},
-            {title:"Memória 8",url:"https://www.dropbox.com/scl/fi/bwv6pqsc42l2mck1xjfgv/FOTO-8-NICK.jpg?dl=1"},
-            {title:"Memória 9",url:"https://www.dropbox.com/scl/fi/p611l6uunu6sn8kj4vwix/FOTO-9-NICK.webp?dl=1"},
-            {title:"Memória 10",url:"https://www.dropbox.com/scl/fi/w1s9g3dnfw9iofhucso1u/FOTO-10-NICK.webp?dl=1"}
-        ];
+        // MODIFICAÇÃO 2: Array 'memories' com os caminhos corretos na pasta assets/
+        const memories = [
+            { title: "Memória 1", url: "assets/FOTO 1 NICK.jpg" },
+            { title: "Memória 2", url: "assets/FOTO 2 NICK.jpg" },
+            { title: "Memória 3", url: "assets/FOTO 3 NICK.jpg" },
+            { title: "Memória 4", url: "assets/FOTO 4 (2).jpg" },
+            { title: "Memória 5", url: "assets/FOTO 5 NICK.webp" },
+            { title: "Memória 6", url: "assets/FOTO 6 NICK.jpg" },
+            { title: "Memória 7", url: "assets/FOTO 7 NICK.jpg" },
+            { title: "Memória 8", url: "assets/FOTO 9 NICK.webp" },
+            { title: "Memória 9", url: "assets/FOTO 10 NICK.webp" },
+        ];
 
-        function stopAllMusic(){
-            [MUSIC_AMBIENT_1,MUSIC_AMBIENT_2,MUSIC_MEMORY].forEach(a=>{if(a){a.pause();a.currentTime=0;}});
-        }
+        function stopAllMusic() {
+            [MUSIC_AMBIENT_1, MUSIC_AMBIENT_2, MUSIC_MEMORY].forEach(a => { if (a) { a.pause(); a.currentTime = 0; } });
+        }
+        
+        function stopAutoscroll(){
+            clearInterval(autoScrollInterval);
+        }
 
-        function startPhase1Music(){
-            if(MUSIC_AMBIENT_1.paused){MUSIC_AMBIENT_1.play().catch(e=>console.log(e));}
-        }
+        function startPhase1Music() {
+            if (MUSIC_AMBIENT_1.paused) { MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada pelo navegador.")); }
+        }
 
-        document.addEventListener('DOMContentLoaded',()=>{
-            startPhase1Music();
-            document.addEventListener('click',startPhase1Music,{once:true});
-            document.addEventListener('keypress',startPhase1Music,{once:true});
-        });
+        document.addEventListener('DOMContentLoaded', () => {
+            startPhase1Music();
+            document.addEventListener('click', startPhase1Music, { once: true });
+            document.addEventListener('keypress', startPhase1Music, { once: true });
+        });
 
-        function verificarSenha(){
-            const senha=document.getElementById('senhaInput').value.trim();
-            if(senha===SENHA_CORRETA){
-                stopAllMusic();
-                MUSIC_AMBIENT_2.play().catch(e=>console.log(e));
-                document.getElementById('fase1').style.display='none';
-                document.getElementById('fase2').style.display='block';
-                document.getElementById('codigoInput').focus();
-            }else{
-                alert('ACESSO NEGADO (Nível 1). Chave incorreta. Verifique a dica.');
-                document.getElementById('senhaInput').value='';
-            }
-        }
+        function verificarSenha() {
+            const senha = document.getElementById('senhaInput').value.trim();
+            if (senha === SENHA_CORRETA) {
+                stopAllMusic();
+                MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+                document.getElementById('fase1').style.display = 'none';
+                document.getElementById('fase2').style.display = 'block';
+                document.getElementById('codigoInput').focus();
+            } else {
+                alert('ACESSO NEGADO (Nível 1). Chave incorreta. Verifique a dica.');
+                document.getElementById('senhaInput').value = '';
+            }
+        }
 
-        function voltarParaFase1(){
-            stopAllMusic();
-            MUSIC_AMBIENT_1.play().catch(e=>console.log(e));
-            document.getElementById('fase2').style.display='none';
-            document.getElementById('fase1').style.display='block';
-            document.getElementById('senhaInput').focus();
-        }
+        function voltarParaFase1() {
+            stopAllMusic();
+            stopAutoscroll();
+            MUSIC_AMBIENT_1.play().catch(e => console.log("Música 1 bloqueada."));
+            document.getElementById('fase2').style.display = 'none';
+            document.getElementById('fase1').style.display = 'block';
+            document.getElementById('senhaInput').focus();
+        }
 
-        function voltarParaFase2(){
-            stopAllMusic();
-            MUSIC_AMBIENT_2.play().catch(e=>console.log(e));
-            document.getElementById('mensagemFinal').style.display='none';
-            document.getElementById('fase2').style.display='block';
-            document.getElementById('codigoInput').focus();
-        }
+        function voltarParaFase2() {
+            stopAllMusic();
+            stopAutoscroll();
+            MUSIC_AMBIENT_2.play().catch(e => console.log("Música 2 bloqueada."));
+            document.getElementById('mensagemFinal').style.display = 'none';
+            document.getElementById('fase2').style.display = 'block';
+            document.getElementById('codigoInput').focus();
+        }
 
-        function verificarCodigo(){
-            const codigo=document.getElementById('codigoInput').value.trim();
-            if(codigo===CODIGO_CORRETO){
-                stopAllMusic();
-                MUSIC_MEMORY.play().catch(e=>console.log(e));
-                renderMemories();
-                document.getElementById('fase2').style.display='none';
-                document.getElementById('mensagemFinal').style.display='block';
-            }else{
-                alert('CÓDIGO INVÁLIDO. Código incorreto.');
-                document.getElementById('codigoInput').value='';
-            }
-        }
+        function verificarCodigo() {
+            const codigo = document.getElementById('codigoInput').value.trim();
+            if (codigo === CODIGO_CORRETO) {
+                stopAllMusic();
+                
+                // MODIFICAÇÃO 3: Inicia Música Final em Autoplay e Loop
+                MUSIC_MEMORY.loop = true; 
+                MUSIC_MEMORY.play().catch(e => console.log("Música final bloqueada."));
+                
+                renderMemories();
+                startAutoScroll(); // MODIFICAÇÃO 4: Inicia o carrossel automático
+                
+                document.getElementById('fase2').style.display = 'none';
+                document.getElementById('mensagemFinal').style.display = 'block';
+            } else {
+                alert('CÓDIGO INVÁLIDO. Código incorreto.');
+                document.getElementById('codigoInput').value = '';
+            }
+        }
 
-        function renderMemories(){
-            const gallery=document.getElementById('memories-gallery');
-            gallery.innerHTML=memories.map(item=>`
-                <div class="memory-item">
-                    <img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://placehold.co/180x320/333333/00ff66?text=Erro+Foto'">
-                    <div class="memory-caption">${item.title}</div>
-                </div>
-            `).join('');
-        }
+        function renderMemories() {
+            const gallery = document.getElementById('memories-gallery');
+            gallery.innerHTML = memories.map(item => `
+                <div class="memory-item">
+                    <img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://placehold.co/180x320/333333/00ff66?text=Erro+Foto'">
+                    <div class="memory-caption">${item.title}</div>
+                </div>
+            `).join('');
+        }
 
-        let currentScroll=0;
-        function scrollGallery(direction){
-            const gallery=document.getElementById('memories-gallery');
-            const container=document.querySelector('.gallery-container');
-            const itemWidth=gallery.querySelector('.memory-item').offsetWidth+15;
-            currentScroll+=direction*itemWidth;
-            if(currentScroll<0) currentScroll=0;
-            const maxScroll=gallery.scrollWidth-container.offsetWidth;
-            if(currentScroll>maxScroll) currentScroll=maxScroll;
-            gallery.style.transform=`translateX(-${currentScroll}px)`;
-        }
+        let currentScroll = 0;
+        
+        function scrollGallery(direction) {
+            const gallery = document.getElementById('memories-gallery');
+            const container = document.querySelector('.gallery-container');
+            const itemWidth = gallery.querySelector('.memory-item').offsetWidth + 15; 
+            
+            stopAutoscroll(); 
 
-        document.addEventListener('keypress',function(e){
-            if(e.key==='Enter'){
-                if(document.getElementById('fase1').style.display!=='none' && document.getElementById('senhaInput')===document.activeElement){
-                    verificarSenha();
-                }else if(document.getElementById('fase2').style.display!=='none' && document.getElementById('codigoInput')===document.activeElement){
-                    verificarCodigo();
-                }
-            }
-        });
-    </script>
+            currentScroll += direction * itemWidth;
+            
+            if (currentScroll < 0) {
+                currentScroll = 0; 
+            }
+            
+            const maxScroll = gallery.scrollWidth - container.offsetWidth;
+            if (currentScroll > maxScroll) {
+                currentScroll = maxScroll; 
+            }
+            
+            gallery.style.transform = `translateX(-${currentScroll}px)`;
+        }
+
+        function startAutoScroll() {
+            const gallery = document.getElementById('memories-gallery');
+            const container = document.querySelector('.gallery-container');
+            // Verifica se há itens na galeria antes de tentar acessar suas propriedades
+            if(memories.length === 0) return; 
+
+            const itemWidth = gallery.querySelector('.memory-item').offsetWidth + 15; 
+
+            clearInterval(autoScrollInterval); 
+
+            autoScrollInterval = setInterval(() => {
+                const maxScroll = gallery.scrollWidth - container.offsetWidth;
+                
+                if (currentScroll >= maxScroll) {
+                    currentScroll = 0; // Volta para o início
+                } else {
+                    currentScroll += itemWidth;
+                    if (currentScroll > maxScroll) {
+                        currentScroll = maxScroll;
+                    }
+                }
+                gallery.style.transform = `translateX(-${currentScroll}px)`;
+
+            }, 3000); // Roda a cada 3 segundos
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (document.getElementById('fase1').style.display !== 'none' && document.getElementById('senhaInput') === document.activeElement) {
+                    verificarSenha();
+                } else if (document.getElementById('fase2').style.display !== 'none' && document.getElementById('codigoInput') === document.activeElement) {
+                    verificarCodigo();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
